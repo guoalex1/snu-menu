@@ -66,37 +66,34 @@ To pin the trigger to UTC instead of local time (survives timezone
 changes): after creating `$trigger`, set
 `$trigger.StartBoundary = "2026-09-29T22:00:00Z"` (22:00 UTC = 07:00 KST).
 
-## The signup form
+## Subscribers
 
-A Google Form with two questions, in this order:
+`subscribers.csv` (path set by `subscribers_file:` in `config.yaml`), one
+line per person: email first, then optionally the cafeterias they want,
+using the Korean names from the `cafeterias:` map. An email alone means
+all cafeterias; `#` lines are comments.
 
-1. **Email** — short answer (or the form's "Collect email addresses"
-   setting).
-2. **Which cafeterias do you want?** — checkboxes, one option per label in
-   `config.yaml`'s `cafeterias:` map, written *exactly* the same (labels
-   must not contain commas). Leave it optional and last on the form.
+```csv
+# email[, cafeteria, cafeteria, ...]
+alexguoxh@gmail.com
+friend@example.com,301동식당,예술계식당(아름드리)
+```
 
-Link the form to a response Sheet (Responses tab → Sheets icon), then in
-the sheet: File → Share → **Publish to web** → responses tab + **CSV** →
-paste the URL into `subscribers_csv:` in `config.yaml`. (A local file path
-works too — `tests/fixtures/subscribers.csv` is the test stand-in.)
+- Everyone with the same selection shares one email, BCC'd, so subscribers
+  never see each other's addresses.
+- Cafeterias always appear in `cafeterias:` (config) order.
+- A typo'd cafeteria name or a malformed line makes the run exit with an
+  error naming it, rather than silently dropping someone.
+- The label in `cafeterias:` doubles as the cafeteria's English name in
+  the email (trailing parenthetical stripped): `Bldg 301 cafeteria
+  (301동식당)` → heading "Bldg 301 cafeteria".
 
-Rules applied each run:
+Adding a cafeteria to offer = one `label: Korean name` line in
+`cafeterias:`. Anyone with no explicit list ("all") starts receiving it
+automatically.
 
-- A person's **latest** submission wins — resubmitting changes their
-  cafeterias; resubmitting with nothing checked unsubscribes them.
-- Same selection ⇒ same email, everyone BCC'd.
-- Cafeterias appear in `cafeterias:` (config) order.
-- The label doubles as the cafeteria's English name in the email (trailing
-  parenthetical stripped): `Bldg 301 cafeteria (301동식당)` → heading
-  "Bldg 301 cafeteria".
-
-Adding a cafeteria = add `label: Korean name` to `cafeterias:` **and** the
-same label as a form option.
-
-**Privacy:** a published-to-web CSV is readable by anyone with the URL
-(long, unguessable, unindexed — but it contains subscriber emails; don't
-post it). Private alternative: Google service account + Sheets API.
+The file is gitignored so friends' addresses stay off GitHub; it lives
+only on this machine (remember it's not backed up by the repo).
 
 ## Glossary review sessions
 

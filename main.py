@@ -13,8 +13,10 @@ Environment variables (only needed when actually sending):
 """
 
 import argparse
+import csv
 import os
 import re
+import socket
 import sys
 import traceback
 from datetime import datetime
@@ -25,7 +27,6 @@ import yaml
 
 from snumenu import emailer, scrape
 from snumenu.glossary import Glossary
-from snumenu.subscribers import load_subscribers
 from snumenu.translate import translate_dish
 
 ROOT = Path(__file__).parent
@@ -34,6 +35,7 @@ SEOUL = ZoneInfo("Asia/Seoul")
 
 def main() -> int:
     args = parse_args()
+    socket.setdefaulttimeout(15)  # no network call may hang the run
     load_env(ROOT / ".env")
     config = yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
     glossary = Glossary.load(ROOT / "glossary.yaml")
@@ -43,7 +45,7 @@ def main() -> int:
 
     date = args.date or datetime.now(SEOUL).strftime("%Y-%m-%d")
     date_label = datetime.strptime(date, "%Y-%m-%d").strftime(config["date_format"])
-    label_map = config["cafeterias"]  # form label -> Korean name on the site
+    label_map = config["cafeterias"]  # display label -> Korean name on the site
 
     try:
         restaurants = scrape.parse_menus(scrape.fetch_html(date))
@@ -61,24 +63,23 @@ def main() -> int:
 
     english_names = {ko: english_name(label) for label, ko in label_map.items()}
 
+    # Translate the whole page every run, whatever people subscribe to, so
+    # the glossary keeps growing for every cafeteria.
+    full_menu = build_menu(restaurants, [r.name for r in restaurants],
+                           english_names, glossary)
+    save_glossary(glossary)
+
     if args.command == "print":
-        menu = build_menu(restaurants, label_map.values(), english_names, glossary)
-        save_glossary(glossary)
-        if menu:
-            print(emailer.build_text(menu, date_label))
+        if full_menu:
+            print(emailer.build_text(full_menu, date_label))
         else:
             print(f"No menu for {date_label} (weekend or holiday?).")
         return 0
 
-    try:
-        subscribers = load_subscribers(config["subscribers_csv"], label_map)
-    except Exception:
-        notify_me("SNU menu: could not read the subscriber sheet",
-                  traceback.format_exc(), args)
-        return 1
-
+    subscribers = read_subscribers(ROOT / config["subscribers_file"],
+                                   list(label_map.values()))
     if not subscribers:
-        print("no subscribers on the signup sheet; nothing to send", file=sys.stderr)
+        print("no subscribers; nothing to send", file=sys.stderr)
         return 0
 
     # One email per distinct cafeteria selection, its subscribers BCC'd together.
@@ -91,7 +92,6 @@ def main() -> int:
         for cafeterias, recipients in groups.items()
         if (menu := build_menu(restaurants, cafeterias, english_names, glossary))
     ]
-    save_glossary(glossary)
 
     if not batches:
         if config.get("notify_me_when_empty", True):
@@ -126,9 +126,32 @@ def main() -> int:
     return 0
 
 
-def english_name(form_label: str) -> str:
+def read_subscribers(path, offered) -> dict[str, tuple[str, ...]]:
+    """Parse the subscribers CSV: one line per person, email first, then
+    optionally the cafeterias they want (Korean names, `offered` order).
+    An email alone means all cafeterias; "#" lines are comments.
+    """
+    if not Path(path).exists():
+        sys.exit(f"{path} not found — create it (one email per line)")
+    subscribers = {}
+    for row in csv.reader(Path(path).read_text(encoding="utf-8").splitlines()):
+        if not row or row[0].lstrip().startswith("#"):
+            continue
+        email = row[0].strip().lower()
+        if "@" not in email:
+            sys.exit(f"{path}: not an email address: {row[0]!r}")
+        wanted = [c.strip() for c in row[1:] if c.strip()]
+        unknown = sorted(set(wanted) - set(offered))
+        if unknown:
+            sys.exit(f"{path}: unknown cafeterias for {email}: {', '.join(unknown)}")
+        subscribers[email] = tuple(c for c in offered if c in wanted) if wanted \
+            else tuple(offered)
+    return subscribers
+
+
+def english_name(label: str) -> str:
     """"Bldg 301 cafeteria (301동식당)" -> "Bldg 301 cafeteria"."""
-    return re.sub(r"\s*\([^)]*\)\s*$", "", form_label) or form_label
+    return re.sub(r"\s*\([^)]*\)\s*$", "", label) or label
 
 
 def build_menu(restaurants, wanted_names, english_names, glossary):

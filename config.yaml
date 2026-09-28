@@ -1,16 +1,16 @@
-# Cafeterias offered on the signup form, in email display order.
-# Maps the form's checkbox label (exactly as written on the form; no commas)
-# to the exact Korean restaurant name as shown on https://snumenu.gerosyab.net
+# Cafeterias on offer, in email display order. Maps a display label (the
+# part before the parenthetical becomes the English name in the email) to
+# the exact Korean restaurant name as shown on https://snumenu.gerosyab.net
 cafeterias:
   Bldg 301 cafeteria (301동식당): 301동식당
   Bldg 302 cafeteria (302동식당): 302동식당
   Dongwon cafeteria (동원관식당): 동원관식당(113동)
   Arts complex cafeteria (예술계식당 아름드리): 예술계식당(아름드리)
 
-# The Google Form's response sheet, published as CSV: in the sheet,
-# File > Share > Publish to web > pick the responses tab + CSV, paste the URL.
-# A local file path also works (used for testing).
-subscribers_csv: tests/fixtures/subscribers.csv
+# Who gets the email: a local CSV, one line per person — email first, then
+# optionally the cafeterias they want (Korean names from the map above).
+# An email alone means all cafeterias. "#" lines are comments.
+subscribers_file: subscribers.csv
 
 # Email subject; {date} is formatted with date_format (strftime codes).
 subject_format: "SNU cafeteria menu · {date}"

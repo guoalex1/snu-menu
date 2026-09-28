@@ -82,11 +82,18 @@ def _translate_component(component: str, glossary: Glossary) -> tuple[str, bool]
     return english, not reviewed
 
 
+_failures = 0  # consecutive; after 3, stop trying for the rest of the run
+
+
 def _machine_translate(korean: str, glossary: Glossary) -> tuple[str, bool]:
-    try:
-        english = _translator()(korean)
-    except Exception:
-        english = None
+    global _failures
+    english = None
+    if _failures < 3:
+        try:
+            english = _translator()(korean)
+            _failures = 0
+        except Exception:
+            _failures += 1
     if not english:
         return korean, False  # translator down: show Korean (marked), retry next run
     glossary.add_unreviewed(korean, english)
