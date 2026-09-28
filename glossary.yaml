@@ -1,0 +1,117 @@
+# Korean -> English glossary for dish names. Hand-edited; see README.
+#
+# dishes:      reviewed translations (trusted, shown without a footnote marker)
+# unreviewed:  machine translations added automatically by each run.
+#              To review: fix the English, then move the line into `dishes:`.
+# annotations: parenthetical markers like (뚝); an empty value hides the marker.
+#
+# Sections are kept sorted by the Korean key so diffs stay clean.
+
+dishes:
+  301동1층교직원전용식당: Staff-only section (Bldg 301, 1F)
+  7선 산채비빔밥: Bibimbap with seven mountain greens
+  TAKE-OUT: Take-out
+  TAKE-OUT 카페 301동: Take-out café (Bldg 301)
+  감자고추장찌개: Gochujang (chili paste) stew with potato
+  계란소보루컵밥: Cup rice with egg crumble
+  계란후라이: fried egg
+  고등어 소금구이: Salt-grilled mackerel
+  그린샐러드: green salad
+  김말이튀김: Gimmari (fried seaweed spring rolls)
+  김치: kimchi
+  김치찌개: Kimchi-jjigae (kimchi stew)
+  깍두기: kkakdugi (cubed radish kimchi)
+  낙지쭈꾸미볶음: Spicy stir-fried octopus
+  냉면: Naengmyeon (cold noodles)
+  단호박범벅: mashed sweet pumpkin
+  닭가슴살큐브샐러드: Chicken breast cube salad
+  돈육듬뿍김치찌개: Kimchi-jjigae (kimchi stew) loaded with pork
+  두부조림: braised tofu
+  두부팽이미소국: Miso soup with tofu and enoki
+  두유: soy milk
+  떡갈비 구이: Grilled tteok-galbi (beef rib patties)
+  뚝배기)순살감자탕: Boneless gamja-tang (pork bone stew) in a hot stone pot
+  라면사리: ramen noodles (add-in)
+  라면사리부대찌개: Budae-jjigae (army stew) with ramen noodles
+  마늘닭강정: Garlic dakgangjeong (sweet crispy chicken)
+  마라우육덮밥: Mala beef rice bowl
+  마제소바: Mazesoba (brothless noodles)
+  만두국: Manduguk (dumpling soup)
+  매콤짜장떡볶이: Spicy jjajang tteokbokki (rice cakes in black bean sauce)
+  모듬까스: assorted cutlets
+  목살김치찌개: Kimchi-jjigae (kimchi stew) with pork neck
+  목살필라프: Pork pilaf
+  무말랭이무침: seasoned dried radish
+  미니마들렌: mini madeleines
+  미역줄기볶음: stir-fried seaweed stems
+  바베큐돈육폭찹: BBQ pork chop
+  바삭멘치까스: Crispy menchi-katsu (minced meat cutlet)
+  밥: rice
+  백순대볶음: Stir-fried sundae (Korean sausage), mild
+  봉골레파스타: Vongole pasta (clams)
+  부대찌개: Budae-jjigae (Korean army stew)
+  뷔페: Buffet
+  비엔나야채볶음: stir-fried Vienna sausages and vegetables
+  삼각김밥: Triangle gimbap (rice ball)
+  삼겹살통마늘구이: Grilled pork belly with whole garlic
+  새싹들기름막국수: Makguksu (buckwheat noodles) in perilla oil with sprouts
+  선식: multigrain shake
+  섭산적: Seopsanjeok (grilled minced beef patties)
+  셀프라면: Self-serve ramen
+  셀프코너: Self-serve buffet
+  소갈비탕: Galbi-tang (beef short rib soup)
+  소면: somyeon (thin noodles)
+  소불고기뚝배기: Beef bulgogi hot pot
+  소세지케찹볶음: sausages stir-fried in ketchup
+  소스: sauce
+  솥밥: Sotbap (freshly cooked pot rice)
+  순두부: soft tofu
+  순두부찌개: Sundubu-jjigae (soft tofu stew)
+  식사: Meals
+  야채튀김우동: Udon with vegetable tempura
+  어묵국: fish cake soup
+  어묵전골: Fish cake hot pot
+  오늘의차: tea of the day
+  오리엔탈s: oriental dressing
+  오코노미함박: Hamburg steak, okonomiyaki-style
+  온두부: warm tofu
+  우유: milk
+  잔치국수: Janchi-guksu (warm noodle soup)
+  잡곡밥: multigrain rice
+  전주비빔밥: Jeonju bibimbap
+  제육강정: Sweet-and-spicy crispy pork
+  제육김치두루치기: Spicy stir-fried pork and kimchi (duruchigi)
+  조선떡갈비구이: Grilled tteok-galbi (beef rib patties), traditional style
+  주문식메뉴: Made-to-order menu
+  즉석떡국: Tteokguk (rice cake soup)
+  즉석라면: Ramen noodles
+  직화제육볶음: Flame-grilled jeyuk-bokkeum (spicy pork)
+  차돌순두부: Sundubu-jjigae (soft tofu stew) with beef brisket
+  천원의아침밥: ₩1,000 breakfast
+  철판제육볶음: Spicy pork stir-fried on an iron plate
+  철판주꾸미 볶음: Baby octopus stir-fried on an iron plate
+  초계국수: Chogye-guksu (chilled chicken noodle soup)
+  치킨너겟: chicken nuggets
+  치킨마요덮밥: Chicken mayo rice bowl
+  코코넛밀크커리: Coconut milk curry
+  콩나물국: bean sprout soup
+  콩자반: soy-braised black beans
+  타카나즈케무침: Seasoned takana (pickled mustard greens)
+  표고버섯탕수: Sweet-and-sour shiitake mushrooms
+  프렌치토스트: French toast
+  함박스테이크: Hamburg steak
+  핫커리치킨텐더: Chicken tenders in hot curry sauce
+  헬스팩: Health pack (high-protein meal box)
+
+unreviewed: {}
+
+annotations:
+  '#': ''
+  大: large
+  뚝: served in a hot stone pot
+  소: small
+  순살변경 +: boneless option for an extra charge
+  잇템: featured item
+  중: medium
+  채식변경가능: vegetarian option available
+  추가: extra

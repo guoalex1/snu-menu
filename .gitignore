@@ -1,0 +1,5 @@
+__pycache__/
+.pytest_cache/
+email-*.html
+.env
+menu.log
