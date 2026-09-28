@@ -21,7 +21,7 @@ class Row:
     machine: bool
 
 
-# menu structure passed in: [(restaurant_name, [(meal_label_ko, [Row, ...]), ...]), ...]
+# menu structure passed in: [((name_en, name_ko), [(meal_label_ko, [Row, ...]), ...]), ...]
 
 
 def meal_label_en(label_ko: str) -> str:
@@ -37,8 +37,8 @@ def _won(price: int | None) -> str:
 def build_text(menu, date_label: str) -> str:
     lines = [f"SNU cafeteria menu — {date_label}", ""]
     any_machine = False
-    for restaurant, meals in menu:
-        lines.append(f"■ {restaurant}")
+    for (name_en, name_ko), meals in menu:
+        lines.append(f"■ {name_en} — {name_ko}")
         for meal_ko, rows in meals:
             lines.append(f"  {meal_label_en(meal_ko)}")
             for row in rows:
@@ -64,10 +64,11 @@ def build_html(menu, date_label: str) -> str:
         f"SNU cafeteria menu <span style='font-weight:normal;color:#666'>— {date_label}</span></h1>",
     ]
     any_machine = False
-    for restaurant, meals in menu:
+    for (name_en, name_ko), meals in menu:
         parts.append(
             f'<h2 style="font-size:17px;margin:20px 0 4px;padding-bottom:4px;'
-            f'border-bottom:2px solid #333">{restaurant}</h2>'
+            f'border-bottom:2px solid #333">{name_en} '
+            f'<span style="font-size:13px;font-weight:normal;color:#999">{name_ko}</span></h2>'
         )
         for meal_ko, rows in meals:
             parts.append(

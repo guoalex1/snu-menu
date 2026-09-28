@@ -14,6 +14,7 @@ Environment variables (only needed when actually sending):
 
 import argparse
 import os
+import re
 import sys
 import traceback
 from datetime import datetime
@@ -58,8 +59,10 @@ def main() -> int:
         )
         return 1
 
+    english_names = {ko: english_name(label) for label, ko in label_map.items()}
+
     if args.command == "print":
-        menu = build_menu(restaurants, label_map.values(), glossary)
+        menu = build_menu(restaurants, label_map.values(), english_names, glossary)
         save_glossary(glossary)
         if menu:
             print(emailer.build_text(menu, date_label))
@@ -86,7 +89,7 @@ def main() -> int:
     batches = [
         (menu, recipients)
         for cafeterias, recipients in groups.items()
-        if (menu := build_menu(restaurants, cafeterias, glossary))
+        if (menu := build_menu(restaurants, cafeterias, english_names, glossary))
     ]
     save_glossary(glossary)
 
@@ -123,7 +126,12 @@ def main() -> int:
     return 0
 
 
-def build_menu(restaurants, wanted_names, glossary):
+def english_name(form_label: str) -> str:
+    """"Bldg 301 cafeteria (301동식당)" -> "Bldg 301 cafeteria"."""
+    return re.sub(r"\s*\([^)]*\)\s*$", "", form_label) or form_label
+
+
+def build_menu(restaurants, wanted_names, english_names, glossary):
     """Keep only the wanted restaurants, in order, with every dish translated."""
     by_name = {r.name: r for r in restaurants}
     menu = []
@@ -146,7 +154,7 @@ def build_menu(restaurants, wanted_names, glossary):
                     )
                 )
             meals.append((meal_ko, rows))
-        menu.append((restaurant.name, meals))
+        menu.append(((english_names.get(name, name), restaurant.name), meals))
     return menu
 
 
