@@ -25,9 +25,8 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
-from snumenu import emailer, scrape
+from snumenu import emailer, scrape, translate
 from snumenu.glossary import Glossary
-from snumenu.translate import translate_dish
 
 ROOT = Path(__file__).parent
 SEOUL = ZoneInfo("Asia/Seoul")
@@ -63,23 +62,34 @@ def main() -> int:
 
     english_names = {ko: english_name(label) for label, ko in label_map.items()}
 
-    # Translate the whole page every run, whatever people subscribe to, so
-    # the glossary keeps growing for every cafeteria.
-    full_menu = build_menu(restaurants, [r.name for r in restaurants],
-                           english_names, glossary)
-    save_glossary(glossary)
+    if args.command == "print":
+        # print shows (and translates) the whole page
+        target_names = [r.name for r in restaurants]
+    else:
+        subscribers = read_subscribers(ROOT / config["subscribers_file"],
+                                       list(label_map.values()))
+        if not subscribers:
+            print("no subscribers; nothing to send", file=sys.stderr)
+            return 0
+        # the daily run only translates cafeterias someone subscribes to
+        subscribed = set().union(*subscribers.values())
+        target_names = [name for name in label_map.values() if name in subscribed]
+
+    # machine-translate all unknown dishes in one batch up front
+    wanted = set(target_names)
+    translate.prefetch(
+        [dish.name_ko for r in restaurants if r.name in wanted
+         for dishes in r.meals.values() for dish in dishes],
+        glossary,
+    )
 
     if args.command == "print":
-        if full_menu:
-            print(emailer.build_text(full_menu, date_label))
+        menu = build_menu(restaurants, target_names, english_names, glossary)
+        save_glossary(glossary)
+        if menu:
+            print(emailer.build_text(menu, date_label))
         else:
             print(f"No menu for {date_label} (weekend or holiday?).")
-        return 0
-
-    subscribers = read_subscribers(ROOT / config["subscribers_file"],
-                                   list(label_map.values()))
-    if not subscribers:
-        print("no subscribers; nothing to send", file=sys.stderr)
         return 0
 
     # One email per distinct cafeteria selection, its subscribers BCC'd together.
@@ -92,6 +102,7 @@ def main() -> int:
         for cafeterias, recipients in groups.items()
         if (menu := build_menu(restaurants, cafeterias, english_names, glossary))
     ]
+    save_glossary(glossary)
 
     if not batches:
         if config.get("notify_me_when_empty", True):
@@ -166,7 +177,7 @@ def build_menu(restaurants, wanted_names, english_names, glossary):
         for meal_ko, dishes in restaurant.meals.items():
             rows = []
             for dish in dishes:
-                t = translate_dish(dish.name_ko, glossary)
+                t = translate.translate_dish(dish.name_ko, glossary)
                 rows.append(
                     emailer.Row(
                         english=t.english,

@@ -103,7 +103,37 @@ dishes:
   핫커리치킨텐더: Chicken tenders in hot curry sauce
   헬스팩: Health pack (high-protein meal box)
 
-unreviewed: {}
+unreviewed:
+  가라아게튀김: Karaage (Japanese-style fried chicken)
+  감자고로케: Potato croquette
+  감자채볶음: Stir-fried shredded potato
+  계란찜: Steamed egg
+  고구마맛탕: Candied sweet potato
+  닭갈비볶음밥: Dak-galbi (spicy chicken) fried rice
+  닭볶음탕: Dak-bokkeum-tang (spicy braised chicken)
+  도토리묵: Dotori-muk (acorn jelly)
+  두부김치: Dubu-kimchi (tofu with stir-fried kimchi)
+  뚝배기)스팸고추장찌개: Spam gochujang-jjigae (spicy red pepper paste stew) in a hot stone pot
+  매운갈비떡찜: Spicy braised short ribs with rice cakes
+  매콤두부자박조림: Spicy braised tofu in sauce
+  미니열무보리비빔밥: Mini barley bibimbap with young radish greens
+  미역국: Miyeok-guk (seaweed soup)
+  바사삭포크후라이드: Crispy fried pork
+  베테랑칼국수: Veteran-style kalguksu (knife-cut noodle soup)
+  볼어묵볶음: Stir-fried fish cake balls
+  비빔야채만두: Vegetable dumplings with spicy sauce
+  사골우거지국: Beef bone soup with cabbage greens
+  상추겉절이: Fresh lettuce salad with spicy dressing
+  양념장: Seasoned soy dipping sauce
+  어묵매운탕: Spicy fish cake soup
+  연근조림: Braised lotus root
+  옥수수야채전: Corn and vegetable pancake
+  유부초밥: Yubu-chobap (fried tofu pockets with rice)
+  제육컵밥: Spicy stir-fried pork cup rice
+  차돌박이된장찌개: Doenjang-jjigae (soybean paste stew) with beef brisket
+  치킨까스: Chicken cutlet
+  카프레제샐러드: Caprese salad
+  콩나물무침: Seasoned bean sprouts
 
 annotations:
   '#': ''

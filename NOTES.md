@@ -9,7 +9,27 @@ python main.py                    # actually send (needs .env)
 ```
 
 The machine-translation fallback is swappable in one place:
-`get_machine_translator()` in `snumenu/translate.py`.
+`get_machine_translator()` in `snumenu/translate.py`. Currently: the
+Claude CLI translates all unknown names in one batch call (best quality;
+runs on the Claude Code subscription, so `claude` must be logged in and on
+PATH for the scheduled task); if that fails, DeepL (when `DEEPL_API_KEY`
+is in `.env`; called via its REST API directly, since the deep-translator
+wrapper lacks Korean) and then Google take over. Google 429-blocks this
+ISP's IP range with its "unusual traffic" wall — may lift on its own.
+Claude stays primary on purpose: DeepL tested well on descriptive names
+but outputs bare romanization ("Seopsan-jeok") for culturally-specific
+dishes, and doesn't follow the glossary's romanized-name + gloss style.
+
+DeepL setup: sign up for the **DeepL API Free** plan at
+<https://www.deepl.com/pro-api> (needs an email and a card for identity
+verification — it is not charged; free quota is 500k chars/month, orders
+of magnitude more than this uses). Then Account → **API Keys** → copy the
+key (free-plan keys end in `:fx`) and add `DEEPL_API_KEY=...:fx` to
+`.env`. Without the key the chain just skips DeepL.
+The daily run only translates cafeterias someone subscribes to; `print`
+translates the whole page (useful to pre-warm the glossary before offering
+a new cafeteria). After 3 consecutive translator failures a run gives up
+and shows Korean names, retrying next day.
 
 ## Environment (.env)
 
