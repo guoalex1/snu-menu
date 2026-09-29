@@ -6,7 +6,6 @@ Usage:
     python main.py --dry-run       print the emails instead of sending them
     python main.py --date 2026-09-28
     python main.py print           just print the translated menu, no email
-    python main.py review          list unreviewed glossary entries
 
 Environment variables (only needed when actually sending):
     GMAIL_ADDRESS, GMAIL_APP_PASSWORD, MY_EMAIL
@@ -38,9 +37,6 @@ def main() -> int:
     load_env(ROOT / ".env")
     config = yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
     glossary = Glossary.load(ROOT / "glossary.yaml")
-
-    if args.command == "review":
-        return review(glossary)
 
     date = args.date or datetime.now(SEOUL).strftime("%Y-%m-%d")
     date_label = datetime.strptime(date, "%Y-%m-%d").strftime(config["date_format"])
@@ -177,14 +173,12 @@ def build_menu(restaurants, wanted_names, english_names, glossary):
         for meal_ko, dishes in restaurant.meals.items():
             rows = []
             for dish in dishes:
-                t = translate.translate_dish(dish.name_ko, glossary)
                 rows.append(
                     emailer.Row(
-                        english=t.english,
+                        english=translate.translate_dish(dish.name_ko, glossary),
                         name_ko=dish.name_ko,
                         price=dish.price,
                         is_header=dish.is_header,
-                        machine=t.machine,
                     )
                 )
             meals.append((meal_ko, rows))
@@ -194,21 +188,7 @@ def build_menu(restaurants, wanted_names, english_names, glossary):
 
 def save_glossary(glossary: Glossary) -> None:
     if glossary.save_if_changed():
-        print("glossary.yaml updated with new unreviewed entries", file=sys.stderr)
-
-
-def review(glossary: Glossary) -> int:
-    if not glossary.unreviewed:
-        print("No unreviewed entries. 🎉")
-        return 0
-    width = max(len(k) for k in glossary.unreviewed)
-    for korean, english in sorted(glossary.unreviewed.items()):
-        print(f"{korean:<{width}}  {english}")
-    print(
-        f"\n{len(glossary.unreviewed)} unreviewed. Edit glossary.yaml: fix the "
-        "English, then move the line from `unreviewed:` into `dishes:`."
-    )
-    return 0
+        print("glossary.yaml updated with new entries", file=sys.stderr)
 
 
 def notify_me(subject: str, body: str, args) -> None:
@@ -242,8 +222,7 @@ def gmail_credentials() -> tuple[str, str]:
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", nargs="?", choices=["run", "print", "review"],
-                        default="run")
+    parser.add_argument("command", nargs="?", choices=["run", "print"], default="run")
     parser.add_argument("--date", help="YYYY-MM-DD (default: today in Seoul)")
     parser.add_argument("--dry-run", action="store_true",
                         help="print the emails and write email-N.html instead of sending")

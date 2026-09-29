@@ -1,10 +1,11 @@
 """Load and save glossary.yaml.
 
-The file has three sections:
+Two sections:
 
-    dishes:      Korean -> English, reviewed by a human. One line per dish.
-    unreviewed:  Korean -> English, machine-translated. To review an entry,
-                 fix the English and move the line up into `dishes:`.
+    dishes:      Korean -> English. Hand-maintained translations plus every
+                 machine translation, cached so each name is translated once.
+                 Editing an entry by hand always wins: cached values are
+                 never overwritten.
     annotations: parenthetical markers like (뚝) -> English gloss.
 
 Saving always rewrites the file with the same fixed header comments and each
@@ -18,11 +19,10 @@ from pathlib import Path
 import yaml
 
 HEADER = """\
-# Korean -> English glossary for dish names. Hand-edited; see README.
+# Korean -> English glossary for dish names: hand-maintained translations
+# plus cached machine translations (new dishes are added automatically).
+# Edit entries freely — whatever is here is used as-is.
 #
-# dishes:      reviewed translations (trusted, shown without a footnote marker)
-# unreviewed:  machine translations added automatically by each run.
-#              To review: fix the English, then move the line into `dishes:`.
 # annotations: parenthetical markers like (뚝); an empty value hides the marker.
 #
 # Sections are kept sorted by the Korean key so diffs stay clean.
@@ -33,7 +33,6 @@ HEADER = """\
 class Glossary:
     path: Path
     dishes: dict[str, str] = field(default_factory=dict)
-    unreviewed: dict[str, str] = field(default_factory=dict)
     annotations: dict[str, str] = field(default_factory=dict)
     _dirty: bool = False
 
@@ -44,35 +43,32 @@ class Glossary:
         return cls(
             path=path,
             dishes=data.get("dishes") or {},
-            unreviewed=data.get("unreviewed") or {},
             annotations=data.get("annotations") or {},
         )
 
-    def lookup(self, korean: str) -> tuple[str, bool] | None:
-        """Return (english, reviewed) for an exact match, else None."""
-        if korean in self.dishes:
-            return self.dishes[korean], True
-        if korean in self.unreviewed:
-            return self.unreviewed[korean], False
+    def lookup(self, korean: str) -> str | None:
+        """Exact match first, then case-insensitive (for Latin parts like ICE)."""
+        hit = self.dishes.get(korean)
+        if hit is not None:
+            return hit
+        norm = korean.strip().casefold()
+        for key, english in self.dishes.items():
+            if key.strip().casefold() == norm:
+                return english
         return None
 
-    def add_unreviewed(self, korean: str, english: str) -> None:
-        self.unreviewed[korean] = english
+    def add(self, korean: str, english: str) -> None:
+        self.dishes[korean] = english
         self._dirty = True
 
     def save_if_changed(self) -> bool:
         """Rewrite the file if new entries were added this run."""
         if not self._dirty:
             return False
-        sections = [
-            ("dishes", self.dishes),
-            ("unreviewed", self.unreviewed),
-            ("annotations", self.annotations),
-        ]
         parts = [HEADER]
-        for name, mapping in sections:
+        for name, mapping in [("dishes", self.dishes), ("annotations", self.annotations)]:
             body = yaml.safe_dump(
-                {name: dict(sorted(mapping.items()))} if mapping else {name: {}},
+                {name: dict(sorted(mapping.items()))},
                 allow_unicode=True,
                 sort_keys=False,
                 default_flow_style=False,

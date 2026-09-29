@@ -9,8 +9,6 @@ SMTP_PORT = 465  # SSL
 
 MEAL_NAMES = {"아침": "Breakfast", "점심": "Lunch", "저녁": "Dinner"}
 
-FOOTNOTE = "* machine-translated, may be rough"
-
 
 @dataclass
 class Row:
@@ -18,7 +16,6 @@ class Row:
     name_ko: str
     price: int | None
     is_header: bool
-    machine: bool
 
 
 # menu structure passed in: [((name_en, name_ko), [(meal_label_ko, [Row, ...]), ...]), ...]
@@ -34,24 +31,24 @@ def _won(price: int | None) -> str:
     return f"₩{price:,}" if price is not None else ""
 
 
+def _display(english: str) -> str:
+    """Capitalize the first letter; glossary values are stored as-is."""
+    return english[:1].upper() + english[1:]
+
+
 def build_text(menu, date_label: str) -> str:
     lines = [f"SNU cafeteria menu — {date_label}", ""]
-    any_machine = False
     for (name_en, name_ko), meals in menu:
         lines.append(f"■ {name_en} — {name_ko}")
         for meal_ko, rows in meals:
             lines.append(f"  {meal_label_en(meal_ko)}")
             for row in rows:
-                star = "*" if row.machine else ""
-                any_machine = any_machine or row.machine
                 price = f" — {_won(row.price)}" if row.price is not None else ""
                 if row.is_header:
-                    lines.append(f"    〈 {row.english}{star} 〉{price}")
+                    lines.append(f"    〈 {_display(row.english)} 〉{price}")
                 else:
-                    lines.append(f"    {row.english}{star} ({row.name_ko}){price}")
+                    lines.append(f"    {_display(row.english)} ({row.name_ko}){price}")
             lines.append("")
-    if any_machine:
-        lines += [FOOTNOTE, ""]
     return "\n".join(lines)
 
 
@@ -63,7 +60,6 @@ def build_html(menu, date_label: str) -> str:
         f'<h1 style="font-size:20px;margin:0 0 16px">'
         f"SNU cafeteria menu <span style='font-weight:normal;color:#666'>— {date_label}</span></h1>",
     ]
-    any_machine = False
     for (name_en, name_ko), meals in menu:
         parts.append(
             f'<h2 style="font-size:17px;margin:20px 0 4px;padding-bottom:4px;'
@@ -77,17 +73,15 @@ def build_html(menu, date_label: str) -> str:
             )
             parts.append('<table style="width:100%;border-collapse:collapse">')
             for row in rows:
-                star = '<sup style="color:#c00">*</sup>' if row.machine else ""
-                any_machine = any_machine or row.machine
                 price = _won(row.price)
                 if row.is_header:
                     name = (
                         f'<span style="color:#666;font-weight:bold">'
-                        f"〈 {row.english}{star} 〉</span>"
+                        f"〈 {_display(row.english)} 〉</span>"
                     )
                 else:
                     name = (
-                        f"{row.english}{star} "
+                        f"{_display(row.english)} "
                         f'<span style="font-size:12px;color:#999">{row.name_ko}</span>'
                     )
                 parts.append(
@@ -97,8 +91,6 @@ def build_html(menu, date_label: str) -> str:
                     f'white-space:nowrap;color:#555">{price}</td></tr>'
                 )
             parts.append("</table>")
-    if any_machine:
-        parts.append(f'<p style="font-size:12px;color:#999;margin-top:16px">{FOOTNOTE}</p>')
     parts.append("</div>")
     return "\n".join(parts)
 

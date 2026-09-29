@@ -115,14 +115,13 @@ automatically.
 The file is gitignored so friends' addresses stay off GitHub; it lives
 only on this machine (remember it's not backed up by the repo).
 
-## Glossary review sessions
+## The glossary
 
-```bash
-python main.py review
-```
-
-then in `glossary.yaml`: fix the English of each listed entry and move the
-line from `unreviewed:` up into `dishes:`. Sections stay sorted; an empty
+`glossary.yaml` is a translation cache: hand-maintained seed translations
+plus every machine translation, added automatically the first time a dish
+appears. Each name is only ever translated once. To fix a bad translation,
+just edit its line — whatever is in the file is used as-is (and to force a
+retranslation, delete the line). Sections stay sorted; an empty
 `annotations:` value hides that marker.
 
 Markers seen on the site so far: `(#)` (no legend on the site — currently

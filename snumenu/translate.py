@@ -5,15 +5,11 @@ Order of attempts for a dish name:
   2. split into components on separators (&, *, +, comma, OR) and translate each:
      a. exact glossary match on the component
      b. pull out known parenthetical annotations like (뚝), then match the rest
-     c. machine-translate what's left; the result is saved to the glossary's
-        `unreviewed` section so it can be reviewed later
-
-Anything not confirmed by a human (unreviewed or freshly machine-translated)
-is flagged so the email can mark it.
+     c. machine-translate what's left; the result is cached in the glossary
+        so each name is only ever translated once
 """
 
 import re
-from dataclasses import dataclass
 from functools import lru_cache
 
 from .glossary import Glossary
@@ -24,19 +20,13 @@ HANGUL = re.compile(r"[가-힣]")
 SEPARATOR_WORDS = {"&": " & ", "+": " & ", ",": " & ", "*": " with ", "OR": " or "}
 
 
-@dataclass
-class Translation:
-    english: str
-    machine: bool  # True if any part is machine-translated / not yet reviewed
-
-
 def get_machine_translator():
     """The fallback translator: a batch of Korean names -> English, in order.
 
     The Claude CLI translates the whole batch in one call with by far the
     best quality for dish names; when it's unavailable, DeepL (if
-    DEEPL_API_KEY is set) then Google translate one name at a time. Swap
-    this one function to use Argos Translate, another LLM, etc.
+    DEEPL_API_KEY is set) then Google take over. Swap this one function to
+    use Argos Translate, another LLM, etc.
     """
 
     def translate_batch(names: list[str]) -> list[str | None]:
@@ -108,43 +98,6 @@ def _translator():
     return get_machine_translator()
 
 
-def translate_dish(name_ko: str, glossary: Glossary) -> Translation:
-    name_ko = name_ko.strip()
-
-    hit = glossary.lookup(name_ko)
-    if hit:
-        return Translation(english=hit[0], machine=not hit[1])
-
-    parts = []
-    machine = False
-    for component, separator in _split(name_ko):
-        english, part_machine = _translate_component(component, glossary)
-        machine = machine or part_machine
-        parts.append(english)
-        parts.append(SEPARATOR_WORDS.get(separator, " & "))
-    return Translation(english="".join(parts[:-1]), machine=machine)
-
-
-def _translate_component(component: str, glossary: Glossary) -> tuple[str, bool]:
-    hit = glossary.lookup(component)
-    if hit:
-        return hit[0], not hit[1]
-
-    base, glosses = _extract_annotations(component, glossary.annotations)
-
-    hit = glossary.lookup(base)
-    if hit:
-        english, reviewed = hit[0], hit[1]
-    elif not HANGUL.search(base):
-        return component, False  # already Latin/symbols, e.g. "TAKE-OUT"
-    else:
-        english, reviewed = _machine_translate(base, glossary)
-
-    if glosses:
-        english = f"{english} ({'; '.join(glosses)})"
-    return english, not reviewed
-
-
 _failures = 0  # consecutive; after 3, stop trying for the rest of the run
 
 
@@ -176,10 +129,42 @@ def prefetch(dish_names: list[str], glossary: Glossary) -> None:
         return
     for korean, english in zip(unknown, translations):
         if english and english.strip() and english.strip() != korean:
-            glossary.add_unreviewed(korean, english.strip())
+            glossary.add(korean, english.strip())
 
 
-def _machine_translate(korean: str, glossary: Glossary) -> tuple[str, bool]:
+def translate_dish(name_ko: str, glossary: Glossary) -> str:
+    name_ko = name_ko.strip()
+
+    hit = glossary.lookup(name_ko)
+    if hit:
+        return hit
+
+    parts = []
+    for component, separator in _split(name_ko):
+        parts.append(_translate_component(component, glossary))
+        parts.append(SEPARATOR_WORDS.get(separator, " & "))
+    return "".join(parts[:-1])
+
+
+def _translate_component(component: str, glossary: Glossary) -> str:
+    hit = glossary.lookup(component)
+    if hit:
+        return hit
+
+    base, glosses = _extract_annotations(component, glossary.annotations)
+
+    english = glossary.lookup(base)
+    if english is None:
+        if not HANGUL.search(base):
+            return component  # already Latin/symbols, e.g. "TAKE-OUT"
+        english = _machine_translate(base, glossary)
+
+    if glosses:
+        english = f"{english} ({'; '.join(glosses)})"
+    return english
+
+
+def _machine_translate(korean: str, glossary: Glossary) -> str:
     global _failures
     english = None
     if _failures < 3:
@@ -189,9 +174,9 @@ def _machine_translate(korean: str, glossary: Glossary) -> tuple[str, bool]:
             english = None
         _failures = 0 if english else _failures + 1
     if not english:
-        return korean, False  # translator down: show Korean (marked), retry next run
-    glossary.add_unreviewed(korean, english)
-    return english, False
+        return korean  # translator down: show Korean, retry next run
+    glossary.add(korean, english)
+    return english
 
 
 def _extract_annotations(name: str, annotations: dict[str, str]) -> tuple[str, list[str]]:

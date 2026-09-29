@@ -1,139 +1,398 @@
-# Korean -> English glossary for dish names. Hand-edited; see README.
+# Korean -> English glossary for dish names: hand-maintained translations
+# plus cached machine translations (new dishes are added automatically).
+# Edit entries freely — whatever is here is used as-is.
 #
-# dishes:      reviewed translations (trusted, shown without a footnote marker)
-# unreviewed:  machine translations added automatically by each run.
-#              To review: fix the English, then move the line into `dishes:`.
 # annotations: parenthetical markers like (뚝); an empty value hides the marker.
 #
 # Sections are kept sorted by the Korean key so diffs stay clean.
 
 dishes:
+  1인 목살스테이크샐러드: Pork neck steak salad (single serving)
   301동1층교직원전용식당: Staff-only section (Bldg 301, 1F)
   7선 산채비빔밥: Bibimbap with seven mountain greens
   TAKE-OUT: Take-out
   TAKE-OUT 카페 301동: Take-out café (Bldg 301)
+  가라아게 카레: Karaage curry (Japanese fried chicken)
+  가라아게튀김: Karaage (Japanese-style fried chicken)
+  갈릭슈림프샐러드: Garlic shrimp salad
+  감자고로케: Potato croquette
   감자고추장찌개: Gochujang (chili paste) stew with potato
+  감자채볶음: Stir-fried shredded potato
+  값찌개: Gap-jjigae (stew shop name)
+  경성돈카츠: Gyeongseong tonkatsu (pork cutlet)
   계란소보루컵밥: Cup rice with egg crumble
+  계란찜: Steamed egg
   계란후라이: fried egg
+  고구마 치즈돈까스: Sweet potato cheese pork cutlet
+  고구마맛탕: Candied sweet potato
+  고구마치즈떡볶이: Sweet potato cheese tteokbokki
+  고기든든: Gogi Deundeun (hearty meat rice bowl)
+  고기소보로 볶음밥: Fried rice with minced meat
+  고기순두부: Meat sundubu (soft tofu stew)
+  고기한접시세트: Meat plate set
   고등어 소금구이: Salt-grilled mackerel
+  곱빼기메뉴: Large-portion menu
+  공기밥: Steamed rice
   그린샐러드: green salad
+  김말이 10조각: Fried seaweed rolls (10 pcs)
+  김말이 10조각 =: Fried seaweed rolls (10 pcs) =
   김말이튀김: Gimmari (fried seaweed spring rolls)
   김치: kimchi
+  김치 필라프: Kimchi pilaf
+  김치돈까스뚝배기: Kimchi pork cutlet hot pot
+  김치순두부: Kimchi sundubu (soft tofu stew)
   김치찌개: Kimchi-jjigae (kimchi stew)
+  김치찌개(밥포함): Kimchi-jjigae (kimchi stew, rice included)
   깍두기: kkakdugi (cubed radish kimchi)
-  낙지쭈꾸미볶음: Spicy stir-fried octopus
+  나주식맑은돼지곰탕: Naju-style clear pork gomtang (pork soup)
+  낙지쭈꾸미볶음: Spicy stir-fried octopus and baby octopus
   냉면: Naengmyeon (cold noodles)
+  냉모밀: Cold soba noodles
+  눈꽃 치즈 돈까스: Snow cheese pork cutlet
+  눈꽃치즈 돈까스: Snow cheese pork cutlet
+  눈꽃치즈떡볶이 / 투움바떡볶이: Snow cheese tteokbokki / Toowoomba tteokbokki
+  단무지: Pickled yellow radish
   단호박범벅: mashed sweet pumpkin
+  단호박샐러드: Sweet pumpkin salad
+  단호박스프/김치두부국: Sweet pumpkin soup / Kimchi tofu soup
+  달콤비프치즈베이크 단품: Sweet beef cheese bake (single)
+  달콤비프치즈베이크 세트: Sweet beef cheese bake (set)
+  닭가슴살샐러드: Chicken breast salad
   닭가슴살큐브샐러드: Chicken breast cube salad
+  닭갈비볶음밥: Dak-galbi (spicy chicken) fried rice
+  닭목살양념구이: Marinated grilled chicken neck meat
+  닭볶음탕: Dak-bokkeum-tang (spicy braised chicken)
+  닭칼국수: Chicken kalguksu (knife-cut noodle soup)
+  더블불고기버거 6,400원 /: Double bulgogi burger 6,400 won /
+  더블비프버거 9,500원 /: Double beef burger 9,500 won /
+  더블통새우버거 7,700원 /: Double whole shrimp burger 7,700 won /
+  데리마요치킨버거 5,600원 /: Teriyaki mayo chicken burger 5,600 won /
+  도토리묵: Dotori-muk (acorn jelly)
+  돈가스 카레우동: Curry udon with pork cutlet
+  돈가스비빔면: Spicy mixed noodles with pork cutlet
+  돈사태단호박조림: Braised pork shank with sweet pumpkin
   돈육듬뿍김치찌개: Kimchi-jjigae (kimchi stew) loaded with pork
+  돼지고추장 수제비찌개: Pork gochujang stew with sujebi (hand-torn dough)
+  돼지김치찌개(밥포함): Pork kimchi-jjigae (kimchi stew, rice included)
+  된장순두부: Doenjang sundubu (soft tofu stew with soybean paste)
+  두부김치: Dubu-kimchi (tofu with stir-fried kimchi)
   두부조림: braised tofu
   두부팽이미소국: Miso soup with tofu and enoki
   두유: soy milk
+  들기름 막국수: Perilla oil makguksu (buckwheat noodles)
+  등심까츠: Pork loin cutlet
+  딥치즈치킨버거 5,700원 /: Deep cheese chicken burger 5,700 won /
   떡갈비 구이: Grilled tteok-galbi (beef rib patties)
   뚝배기)순살감자탕: Boneless gamja-tang (pork bone stew) in a hot stone pot
+  뚝배기)스팸고추장찌개: Spam gochujang-jjigae (spicy red pepper paste stew) in a hot stone pot
+  뚝배기불고기: Ttukbaegi bulgogi (bulgogi hot pot)
+  뚝배기순두부: Ttukbaegi sundubu (soft tofu stew in a hot pot)
+  뚝배기제육: Spicy pork hot pot
   라면사리: ramen noodles (add-in)
   라면사리부대찌개: Budae-jjigae (army stew) with ramen noodles
+  로제리조또: Rosé risotto
+  로제베이컨파스타: Rosé bacon pasta
   마늘닭강정: Garlic dakgangjeong (sweet crispy chicken)
+  마라쌀국수: Mala rice noodle soup (spicy and numbing)
+  마라우삼겹 쌀국수: Mala beef belly rice noodle soup
   마라우육덮밥: Mala beef rice bowl
+  마라탕: Malatang (spicy numbing soup)
   마제소바: Mazesoba (brothless noodles)
+  마파두부덮밥: Mapo tofu rice bowl
   만두국: Manduguk (dumpling soup)
+  매운갈비떡찜: Spicy braised short ribs with rice cakes
+  매운양념치킨: Spicy yangnyeom chicken (hot glazed fried chicken)
+  매콤김소떡: Spicy skewer of seaweed rolls, sausage and rice cakes
+  매콤두부자박조림: Spicy braised tofu in sauce
+  매콤소스깐풍볼: Kkanpung chicken balls in spicy sauce
   매콤짜장떡볶이: Spicy jjajang tteokbokki (rice cakes in black bean sauce)
+  매콤치킨치즈베이크 단품: Spicy chicken cheese bake (single)
+  매콤치킨치즈베이크 세트: Spicy chicken cheese bake (set)
+  메뉴: Menu
+  명태비빔냉면: Bibim-naengmyeon with seasoned pollock (spicy cold noodles)
+  모듬 튀김: Assorted fried snacks
   모듬까스: assorted cutlets
   목살김치찌개: Kimchi-jjigae (kimchi stew) with pork neck
   목살필라프: Pork pilaf
   무말랭이무침: seasoned dried radish
+  묵은지닭볶음탕: Dak-bokkeum-tang with aged kimchi (spicy braised chicken)
+  물냉면: Mul-naengmyeon (cold noodles in chilled broth)
+  미나리곰탕: Minari gomtang (beef soup with water parsley)
   미니마들렌: mini madeleines
+  미니열무보리비빔밥: Mini barley bibimbap with young radish greens
+  미니탕수육: Mini tangsuyuk (sweet and sour pork)
+  미역국: Miyeok-guk (seaweed soup)
   미역줄기볶음: stir-fried seaweed stems
+  밀크치즈볼 5조각: Milk cheese balls (5 pcs)
   바베큐돈육폭찹: BBQ pork chop
+  바비든든: Babi Deundeun (rice bowl shop)
+  바사삭포크후라이드: Crispy fried pork
   바삭멘치까스: Crispy menchi-katsu (minced meat cutlet)
+  바지락된장찌개(밥포함): Clam doenjang-jjigae (soybean paste stew, rice included)
   밥: rice
   백순대볶음: Stir-fried sundae (Korean sausage), mild
+  버거운s 실속세트메뉴: Burgerun's value set menu
+  버거운치킨버거 5,200원 /: Burgerun chicken burger 5,200 won /
+  버팔로스틱 2조각 2,900원 / 4조각 5,800원 / 10조각: Buffalo sticks 2 pcs 2,900 won / 4 pcs 5,800 won / 10 pcs
+  베이컨까르보나라: Bacon carbonara
+  베이컨에그치즈베이크 단품: Bacon egg cheese bake (single)
+  베이컨에그치즈베이크 세트: Bacon egg cheese bake (set)
+  베테랑칼국수: Veteran-style kalguksu (knife-cut noodle soup)
+  볶음 김치덮밥: Stir-fried kimchi rice bowl
+  볼어묵볶음: Stir-fried fish cake balls
   봉골레파스타: Vongole pasta (clams)
+  부대짬뽕: Budae jjamppong (spicy noodle soup with ham and sausage)
   부대찌개: Budae-jjigae (Korean army stew)
+  북어콩나물해장국: Dried pollock and bean sprout hangover soup
+  불고기버거 4,400원 /: Bulgogi burger 4,400 won /
+  불닭레드핫강정: Buldak red hot gangjeong (fiery crispy chicken)
+  불닭볶음면: Buldak spicy chicken noodles
+  불닭통모짜치즈버거 8,400원 /: Buldak (fiery chicken) whole mozzarella cheese burger 8,400 won /
+  불새버거 6,600원 /: Bulgogi shrimp burger 6,600 won /
   뷔페: Buffet
+  비빔 쌀국수: Mixed rice noodles (no broth)
+  비빔냉면: Bibim-naengmyeon (spicy mixed cold noodles)
+  비빔밥: Bibimbap (mixed rice with vegetables)
+  비빔야채만두: Vegetable dumplings with spicy sauce
   비엔나야채볶음: stir-fried Vienna sausages and vegetables
+  비프해쉬버거 7,300원 /: Beef hash burger 7,300 won /
+  사골우거지국: Beef bone soup with cabbage greens
+  사모사: Samosa
+  사이드: Sides
+  삶은계란: Boiled egg
   삼각김밥: Triangle gimbap (rice ball)
+  삼겹살덮밥: Pork belly rice bowl
   삼겹살통마늘구이: Grilled pork belly with whole garlic
+  상추겉절이: Fresh lettuce salad with spicy dressing
   새싹들기름막국수: Makguksu (buckwheat noodles) in perilla oil with sprouts
+  새우튀김 카레라이스: Curry rice with fried shrimp
+  새우튀김옛날 등심돈까스: Old-style pork loin cutlet with fried shrimp
+  새우튀김카레라이스: Curry rice with fried shrimp
+  새우튀김카레우동: Curry udon with fried shrimp
+  샐러드: Salad
+  샐러드파스타: Salad pasta
+  서가앤쿡: Seoga & Cook (restaurant name)
   선식: multigrain shake
   섭산적: Seopsanjeok (grilled minced beef patties)
+  세미뷔페: Semi-buffet
+  세미양식부페: Semi Western-style buffet
   셀프라면: Self-serve ramen
   셀프코너: Self-serve buffet
   소갈비탕: Galbi-tang (beef short rib soup)
+  소떡소떡채소볶음: Stir-fried sotteok-sotteok (sausage and rice cake) with vegetables
   소면: somyeon (thin noodles)
   소불고기뚝배기: Beef bulgogi hot pot
+  소세지 카레라이스: Sausage curry rice
   소세지케찹볶음: sausages stir-fried in ketchup
   소스: sauce
+  소시지치즈베이크 단품: Sausage cheese bake (single)
+  소시지치즈베이크 세트: Sausage cheese bake (set)
+  소이마요치킨: Soy mayo chicken
   솥밥: Sotbap (freshly cooked pot rice)
+  쇠고기버섯죽: Beef and mushroom porridge
+  쇠고기육개장: Beef yukgaejang (spicy beef soup)
+  쇠고기장조림버터비빔밥: Butter bibimbap with soy-braised beef
   순두부: soft tofu
+  순두부열라면: Yeul Ramen with soft tofu
+  순두부짬뽕: Soft tofu jjamppong (spicy noodle soup)
   순두부찌개: Sundubu-jjigae (soft tofu stew)
+  순두부찌개(밥포함): Sundubu-jjigae (soft tofu stew, rice included)
+  순살 변경: Switch to boneless
+  순살후라이드치킨 반마리: Boneless fried chicken (half)
+  숨쉬는순두부: Sumswineun Sundubu (restaurant name)
+  숯불쇠고기쌀국수: Rice noodle soup with charcoal-grilled beef
+  숯불양념치킨덮밥: Charcoal-grilled marinated chicken rice bowl
+  쉬림프샐러드: Shrimp salad
+  쉬림프치즈베이크 5.900원 /: Shrimp cheese bake 5,900 won /
+  스노우치킨: Snow chicken (fried chicken with cheese powder)
+  스노우치킨버거 5,600원 /: Snow chicken burger 5,600 won /
+  스팸: Spam
+  스팸김치찌개(밥포함): Spam kimchi-jjigae (kimchi stew, rice included)
+  스팸마요: Spam mayo rice bowl
+  스팸마요(R): Spam mayo rice bowl (R)
+  시나몬치킨스테이크: Cinnamon chicken steak
   식사: Meals
+  싱글통다리 세트 버거운치킨버거: 'Single whole-leg set: Burgerun chicken burger'
+  씨리얼: Cereal
+  아메리카노 HOT 2,000원 / ICE: Americano HOT 2,000 won / ICE
+  안동식찜닭: Andong-style jjimdak (soy-braised chicken)
+  알감자조림: Soy-braised baby potatoes
+  야끼도리덮밥: Yakitori rice bowl (grilled chicken)
+  야채춘권(3p): Vegetable spring rolls (3 pcs)
   야채튀김우동: Udon with vegetable tempura
+  양념감자 2,100원 /: Seasoned fries 2,100 won /
+  양념장: Seasoned soy dipping sauce
+  양념치킨: Yangnyeom chicken (sweet and spicy glazed fried chicken)
+  양념치킨버거 5,600원 /: Yangnyeom (sweet and spicy) chicken burger 5,600 won /
   어묵국: fish cake soup
+  어묵매운탕: Spicy fish cake soup
   어묵전골: Fish cake hot pot
+  얼갈이된장국: Doenjang soup with young cabbage
+  에그마요휠렛버거 6,100원 /: Egg mayo fillet burger 6,100 won /
+  에그베이컨샐러드: Egg bacon salad
+  연근조림: Braised lotus root
+  연두부튀김포케: Fried silken tofu poke
+  연어 비빔밥(L): Salmon bibimbap (L)
+  연어 비빔밥(S): Salmon bibimbap (S)
+  연어샐러드포케: Salmon salad poke
+  열무고기비빔밥: Bibimbap with young radish kimchi and meat
   오늘의차: tea of the day
   오리엔탈s: oriental dressing
+  오이지무침: Seasoned pickled cucumber
   오코노미함박: Hamburg steak, okonomiyaki-style
+  옥수수 감자고로케 2P: Corn and potato croquettes (2 pcs)
+  옥수수야채전: Corn and vegetable pancake
+  옥수수전: Corn pancake
   온두부: warm tofu
+  우삼겹 쌀국수: Beef belly rice noodle soup
+  우삼겹된장찌개(밥포함): Beef belly doenjang-jjigae (soybean paste stew, rice included)
+  우삼겹짬뽕: Beef belly jjamppong (spicy noodle soup)
+  우삽겹된장찌개(밥포함): Beef belly doenjang-jjigae (soybean paste stew, rice included)
+  우삽겹순두부찌개(밥포함): Beef belly sundubu-jjigae (soft tofu stew, rice included)
   우유: milk
+  위메뉴외에도다양한메뉴가준비되어있습니다: Many other menu items are available besides those listed above
+  유부초밥: Yubu-chobap (fried tofu pockets with rice)
+  육개장: Yukgaejang (spicy beef soup)
+  육즙가득비프버거: Juicy beef burger
+  육즙가득비프버거 6,300원 /: Juicy beef burger 6,300 won /
+  육짬뽕탕: Meat jjamppong soup (no noodles)
+  육회 비빔밥(L): Yukhoe bibimbap (beef tartare, L)
+  육회 비빔밥(S): Yukhoe bibimbap (beef tartare, S)
+  육회비빔밥: Yukhoe bibimbap (beef tartare)
+  음료: Drinks
+  음료 1잔 =: 1 drink =
+  음료 1잔 = 17,100원: 1 drink = 17,100 won
+  음료 2잔 =: 2 drinks =
+  음료1잔 =: 1 drink =
+  이공오 돈까스: 205 pork cutlet
+  이공오돈까스와우동: 205 pork cutlet with udon
+  자메이카통다리: Jamaican whole chicken leg
   잔치국수: Janchi-guksu (warm noodle soup)
   잡곡밥: multigrain rice
+  잡채말이어묵튀김: Fried fish cake rolls stuffed with japchae
+  장어비빔밥: Eel bibimbap
   전주비빔밥: Jeonju bibimbap
   제육강정: Sweet-and-spicy crispy pork
   제육김치두루치기: Spicy stir-fried pork and kimchi (duruchigi)
+  제육덮밥: Jeyuk-deopbap (spicy pork rice bowl)
+  제육컵밥: Spicy stir-fried pork cup rice
+  제육한접시 세트: Spicy pork plate set
+  제육한접시세트: Spicy pork plate set
+  제주청귤/청포도에이드: Jeju green tangerine / Green grape ade
   조선떡갈비구이: Grilled tteok-galbi (beef rib patties), traditional style
   주문식메뉴: Made-to-order menu
+  중화제육덮밥: Chinese-style spicy pork rice bowl
+  즉석 떡볶이: Made-to-order tteokbokki (spicy rice cakes)
+  즉석 마라탕: Made-to-order malatang (spicy numbing soup)
+  즉석 한강 라면: Self-cooked Han River ramyeon
   즉석떡국: Tteokguk (rice cake soup)
   즉석라면: Ramen noodles
+  직화구이: Flame-grilled meat
+  직화구이 쌀국수: Rice noodle soup with flame-grilled meat
+  직화제육덮밥: Flame-grilled spicy pork rice bowl
   직화제육볶음: Flame-grilled jeyuk-bokkeum (spicy pork)
+  짜장면: Jjajangmyeon (black bean sauce noodles)
+  짜파게티: Chapagetti (instant black bean noodles)
+  짬뽕: Jjamppong (spicy seafood noodle soup)
+  찐만두: Steamed dumplings
+  차돌박이된장찌개: Doenjang-jjigae (soybean paste stew) with beef brisket
   차돌순두부: Sundubu-jjigae (soft tofu stew) with beef brisket
+  참치김치찌개(밥포함): Tuna kimchi-jjigae (kimchi stew, rice included)
+  참치마요: Tuna mayo rice bowl
+  참치마요(R): Tuna mayo rice bowl (R)
+  찹쌀 팥 도나쓰: Glutinous rice donut with red bean filling
   천원의아침밥: ₩1,000 breakfast
   철판제육볶음: Spicy pork stir-fried on an iron plate
   철판주꾸미 볶음: Baby octopus stir-fried on an iron plate
+  청양마요떡갈비구이: Grilled tteok-galbi (short rib patties) with Cheongyang chili mayo
   초계국수: Chogye-guksu (chilled chicken noodle soup)
-  치킨너겟: chicken nuggets
-  치킨마요덮밥: Chicken mayo rice bowl
-  코코넛밀크커리: Coconut milk curry
-  콩나물국: bean sprout soup
-  콩자반: soy-braised black beans
-  타카나즈케무침: Seasoned takana (pickled mustard greens)
-  표고버섯탕수: Sweet-and-sour shiitake mushrooms
-  프렌치토스트: French toast
-  함박스테이크: Hamburg steak
-  핫커리치킨텐더: Chicken tenders in hot curry sauce
-  헬스팩: Health pack (high-protein meal box)
-
-unreviewed:
-  가라아게튀김: Karaage (Japanese-style fried chicken)
-  감자고로케: Potato croquette
-  감자채볶음: Stir-fried shredded potato
-  계란찜: Steamed egg
-  고구마맛탕: Candied sweet potato
-  닭갈비볶음밥: Dak-galbi (spicy chicken) fried rice
-  닭볶음탕: Dak-bokkeum-tang (spicy braised chicken)
-  도토리묵: Dotori-muk (acorn jelly)
-  두부김치: Dubu-kimchi (tofu with stir-fried kimchi)
-  뚝배기)스팸고추장찌개: Spam gochujang-jjigae (spicy red pepper paste stew) in a hot stone pot
-  매운갈비떡찜: Spicy braised short ribs with rice cakes
-  매콤두부자박조림: Spicy braised tofu in sauce
-  미니열무보리비빔밥: Mini barley bibimbap with young radish greens
-  미역국: Miyeok-guk (seaweed soup)
-  바사삭포크후라이드: Crispy fried pork
-  베테랑칼국수: Veteran-style kalguksu (knife-cut noodle soup)
-  볼어묵볶음: Stir-fried fish cake balls
-  비빔야채만두: Vegetable dumplings with spicy sauce
-  사골우거지국: Beef bone soup with cabbage greens
-  상추겉절이: Fresh lettuce salad with spicy dressing
-  양념장: Seasoned soy dipping sauce
-  어묵매운탕: Spicy fish cake soup
-  연근조림: Braised lotus root
-  옥수수야채전: Corn and vegetable pancake
-  유부초밥: Yubu-chobap (fried tofu pockets with rice)
-  제육컵밥: Spicy stir-fried pork cup rice
-  차돌박이된장찌개: Doenjang-jjigae (soybean paste stew) with beef brisket
+  추가 시 L세트 변경: Changes to L set when added
+  춘권: Spring rolls
+  춘천순살닭갈비: Chuncheon-style boneless dak-galbi (spicy stir-fried chicken)
+  치즈돈까스: Cheese pork cutlet
+  치즈미트토마토파스타: Cheese meat tomato pasta
+  치즈스틱 2조각 2,100원 / 4조각: Cheese sticks 2 pcs 2,100 won / 4 pcs
+  치킨 마요 덮밥: Chicken mayo rice bowl
   치킨까스: Chicken cutlet
+  치킨너겟: chicken nuggets
+  치킨너겟 4조각 2,100원 / 10조각: Chicken nuggets 4 pcs 2,100 won / 10 pcs
+  치킨마요: Chicken mayo rice bowl
+  치킨마요덮밥: Chicken mayo rice bowl
+  치킨샐러드: Chicken salad
+  치킨탕수육: Chicken tangsuyuk (sweet and sour chicken)
+  칠리마요치킨: Chili mayo chicken
+  칠리마요치킨버거 5,800원 /: Chili mayo chicken burger 5,800 won /
+  칠리스치즈스틱 1조각 3,400원 / 2조각: Chili cheese stick 1 pc 3,400 won / 2 pcs
+  칠리크런치버거 7,100원 /: Chili crunch burger 7,100 won /
+  카레돈가츠: Curry pork cutlet
   카프레제샐러드: Caprese salad
+  커플통다리 세트 버거운치킨버거: 'Couple whole-leg set: Burgerun chicken burger'
+  케이준순살강정: Cajun boneless gangjeong (crispy glazed chicken)
+  코코넛밀크커리: Coconut milk curry
+  콘샐러드: Corn salad
+  콘치즈베이크 단품: Corn cheese bake (single)
+  콘치즈베이크 세트: Corn cheese bake (set)
+  콤비메뉴: Combo menu
+  콩나물국: bean sprout soup
   콩나물무침: Seasoned bean sprouts
+  콩자반: soy-braised black beans
+  크리미카라멜팝콘: Creamy caramel popcorn
+  크림리조또: Cream risotto
+  클래식치즈버거 5,900원 /: Classic cheeseburger 5,900 won /
+  키친101: Kitchen 101
+  키친101 비빔밥(야채): Kitchen 101 bibimbap (vegetable)
+  타카나즈케무침: Seasoned takana (pickled mustard greens)
+  탄산음료: Soft drink
+  탄산음료 M 1,900원 / L: Soft drink M 1,900 won / L
+  탄탄비빔면: Dan dan mixed noodles
+  토끼정: Tokkijung (restaurant name)
+  토끼정카레 돈까스: Tokkijung curry with pork cutlet
+  토마토리조또: Tomato risotto
+  토스트: Toast
+  통모짜치즈버거 8,400원 /: Whole mozzarella cheese burger 8,400 won /
+  통삼겹동파육: Dongpo pork (braised pork belly)
+  통새우버거 5,900원 /: Whole shrimp burger 5,900 won /
+  투움바더블새우버거 7,400원 /: Toowoomba double shrimp burger 7,400 won /
+  투움바비프새우버거 8,700원 /: Toowoomba beef shrimp burger 8,700 won /
+  특 등심 왕돈까스: Special king-size pork loin cutlet
+  팝콘볼박스 7,000원 / 팝콘볼: Popcorn ball box 7,000 won / Popcorn balls
+  포기김치: Whole cabbage kimchi
+  포테이토핫도그: Potato corn dog
+  포포 냉쌀국수: Pho Pho cold rice noodles
+  포포 냉짤국수: Pho Pho cold rice noodles
+  포포 쌀국수: Pho Pho rice noodle soup
+  포포420: Pho Pho 420 (restaurant name)
+  표고버섯탕수: Sweet-and-sour shiitake mushrooms
+  풀치즈베이크 단품: Full cheese bake (single)
+  풀치즈베이크 세트: Full cheese bake (set)
+  프렌치토스트: French toast
+  한강라면(진라면): Han River ramyeon (Jin Ramen)
+  한입강정 세트 버거운치킨버거: 'Bite-size gangjeong set: Burgerun chicken burger'
+  한입떡말이 세트 눈꽃치즈떡볶이: 'Bite-size rice cake roll set: Snow cheese tteokbokki'
+  한입떡복이 세트 눈꽃치즈떡볶이: 'Bite-size tteokbokki set: Snow cheese tteokbokki'
+  한입버거운시그니처버거 9,900원 /: Bite-size Burgerun signature burger 9,900 won /
+  한입베이크 세트 달콤비프치즈베이크: 'Bite-size bake set: Sweet beef cheese bake'
+  한입치킨 세트 버거운치킨버거: 'Bite-size chicken set: Burgerun chicken burger'
+  함박스테이크: Hamburg steak
+  핫소마요치킨: Hot soy mayo chicken
+  핫치킨버거 5,600원 /: Hot chicken burger 5,600 won /
+  핫커리치킨텐더: Chicken tenders in hot curry sauce
+  해물순두부: Seafood sundubu (soft tofu stew)
+  해파리냉채: Chilled jellyfish salad
+  허니치즈강정: Honey cheese gangjeong (crispy glazed chicken)
+  헬스팩: Health pack (high-protein meal box)
+  호구세트: Hogu set
+  화이트어니언강정: White onion gangjeong (crispy glazed chicken)
+  화이트어니언치킨버거 5,900 /: White onion chicken burger 5,900 /
+  후라이드치킨: Fried chicken
+  후라이드치킨 반마리: Fried chicken (half)
+  후라이드통다리: Fried whole chicken leg
+  후라이드통다리 1조각: Fried whole chicken leg (1 pc)
+  후식: Dessert
+  훈제오리포케: Smoked duck poke
+  휠렛불갈비치즈베이크 단품: Fillet bulgalbi (grilled rib flavor) cheese bake (single)
+  휠렛불갈비치즈베이크 세트: Fillet bulgalbi (grilled rib flavor) cheese bake (set)
+  흰우유/두유: Milk / Soy milk
 
 annotations:
   '#': ''
