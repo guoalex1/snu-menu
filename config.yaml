@@ -6,6 +6,18 @@ cafeterias:
   Bldg 302 cafeteria (302동식당): 302동식당
   Dongwon cafeteria (동원관식당): 동원관식당(113동)
   Arts complex cafeteria (예술계식당 아름드리): 예술계식당(아름드리)
+  Student Center cafeteria: 학생식당
+  Jeonmangdae cafeteria No. 3: 전망대(3식당)
+  Dorm cafeteria: 기숙사식당
+  Jahayeon cafeteria 2F: 자하연식당(2층)
+  Jahayeon cafeteria 3F: 자하연식당(3층)
+  Bldg 220 cafeteria: 220동 식당
+  Bldg 75-1 food court: 75-1동 4층 푸드코트
+  Duremidam: 두레미담
+  Toogood snack bar: 투굿(공대간이식당)
+  Ourhome cafeteria: 아워홈
+  Vet school cafeteria: 수의대식당
+  Burgerun Burger: 버거운버거
 
 # Who gets the email: a local CSV, one line per person — email first, then
 # optionally the cafeterias they want (Korean names from the map above).
