@@ -53,7 +53,7 @@ def main() -> None:
         for line in csv_path.read_text(encoding="utf-8").splitlines():
             row = next(csv.reader([line]), None)
             if row and row[0].strip().lower() == email:
-                line, replaced = new_line, True  # update in place
+                line, replaced = new_line, True
             lines.append(line)
     if not replaced:
         lines.append(new_line)

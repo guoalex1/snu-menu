@@ -40,7 +40,14 @@ def main() -> int:
 
     date = args.date or datetime.now(SEOUL).strftime("%Y-%m-%d")
     date_label = datetime.strptime(date, "%Y-%m-%d").strftime(config["date_format"])
-    label_map = config["cafeterias"]  # display label -> Korean name on the site
+
+    sent_marker = ROOT / ".last_sent"
+    sending = args.command == "run" and not args.dry_run
+    if (sending and sent_marker.exists()
+            and sent_marker.read_text().strip() == date):
+        print(f"already sent for {date}; skipping duplicate run", file=sys.stderr)
+        return 0
+    label_map = config["cafeterias"]
 
     try:
         restaurants = scrape.parse_menus(scrape.fetch_html(date))
@@ -59,7 +66,6 @@ def main() -> int:
     english_names = {ko: english_name(label) for label, ko in label_map.items()}
 
     if args.command == "print":
-        # print shows (and translates) the whole page
         target_names = [r.name for r in restaurants]
     else:
         subscribers = read_subscribers(ROOT / config["subscribers_file"],
@@ -67,11 +73,9 @@ def main() -> int:
         if not subscribers:
             print("no subscribers; nothing to send", file=sys.stderr)
             return 0
-        # the daily run only translates cafeterias someone subscribes to
         subscribed = set().union(*subscribers.values())
         target_names = [name for name in label_map.values() if name in subscribed]
 
-    # machine-translate all unknown dishes in one batch up front
     wanted = set(target_names)
     translate.prefetch(
         [dish.name_ko for r in restaurants if r.name in wanted
@@ -129,6 +133,7 @@ def main() -> int:
             emailer.build_html(menu, date_label),
             sender, password, to=sender, bcc=recipients,
         )
+    sent_marker.write_text(date)
     print(f"sent {len(batches)} email(s) covering {len(subscribers)} subscriber(s)")
     return 0
 
